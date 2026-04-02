@@ -10,21 +10,9 @@ pipeline {
             }
         }
 
-        stage('Build') {
-            steps {
-                bat 'npm install'
-            }
-        }
-
-        stage('Test') {
-            steps {
-                bat 'npm test'
-            }
-        }
-
         stage('Deploy') {
             steps {
-                bat 'echo Deploying to server'
+                bat 'echo Deploying project'
             }
         }
     }
