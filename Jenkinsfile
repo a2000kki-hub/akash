@@ -2,27 +2,29 @@ pipeline {
     agent any
 
     stages {
-        stage('Clone') {
+        stage('Checkout') {
             steps {
-                git 'https://github.com/a2000kki-hub/akash.git'
+                git branch: 'main',
+                    url: 'https://github.com/a2000kki-hub/akash.git',
+                    credentialsId: '4914fa25-90d7-4efa-ab3e-fabbad4e02eb'
             }
         }
 
         stage('Build') {
             steps {
-                sh 'npm install'
+                bat 'npm install'
             }
         }
 
         stage('Test') {
             steps {
-                sh 'npm test'
+                bat 'npm test'
             }
         }
 
         stage('Deploy') {
             steps {
-                sh 'echo Deploying to server'
+                bat 'echo Deploying to server'
             }
         }
     }
