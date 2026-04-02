@@ -10,9 +10,23 @@ pipeline {
             }
         }
 
-        stage('Deploy') {
+        stage('Build Docker Image') {
             steps {
-                bat 'echo Deploying project'
+                bat 'docker build -t my-app:latest .'
+            }
+        }
+
+        stage('Run Docker Container') {
+            steps {
+                bat 'docker stop my-app || echo "No container running"'
+                bat 'docker rm my-app || echo "No container to remove"'
+                bat 'docker run -d --name my-app -p 3000:3000 my-app:latest'
+            }
+        }
+
+        stage('Verify Deployment') {
+            steps {
+                bat 'docker ps'
             }
         }
     }
