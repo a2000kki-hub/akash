@@ -2,14 +2,7 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
-            steps {
-                git branch: 'main',
-                    url: 'https://github.com/a2000kki-hub/akash.git',
-                    credentialsId: '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'
-            }
-        }
-
+        
         stage('Build Docker Image') {
             steps {
                 sh 'docker build -t my-app:latest .'
